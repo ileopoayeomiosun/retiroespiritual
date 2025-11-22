@@ -257,7 +257,7 @@ document.getElementById("form-ficha").addEventListener("submit", function(e) {
         sobremesa: document.getElementById("saude-sobremesa").value || "-"
     };
 
-    emailjs.send("service_amqsdiv", "template_yzd20rc", dados)
+    emailjs.send("service_amqsdiv", "template_hv3vkec", dados)
     .then(() => {
         alert("📨 Ficha enviada com sucesso!");
         fecharFichaPessoal();
