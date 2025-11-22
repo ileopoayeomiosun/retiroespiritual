@@ -31,7 +31,7 @@ document.getElementById("modal-inscricoes").addEventListener("click", function(e
 });
 
 /* ==========================================
-      CALENDÁRIO
+      CALENDÁRIO (2 ÚLTIMAS SEXTAS)
 ========================================== */
 const mesesBtns = document.querySelectorAll(".mes-btn");
 const calendario = document.getElementById("calendario-container");
@@ -40,23 +40,32 @@ let dataEscolhida = null;
 function gerarDatas(mes) {
     calendario.innerHTML = "";
     let ano = 2026;
-    let dt = new Date(ano, mes - 1, 1);
 
-    while (dt.getMonth() === mes - 1) {
-        if (dt.getDay() === 5) {
-            let dia = dt.getDate();
-            if (dia >= 14) {
-                let btn = document.createElement("button");
-                btn.classList.add("data-btn");
-                btn.innerText = `${dia}/${mes}/2026`;
-                btn.onclick = () => selecionarData(btn);
-                calendario.appendChild(btn);
-            }
-        }
-        dt.setDate(dt.getDate() + 1);
+    // Último dia do mês
+    let ultimoDia = new Date(ano, mes, 0);
+
+    // Encontra a última sexta-feira do mês
+    while (ultimoDia.getDay() !== 5) {
+        ultimoDia.setDate(ultimoDia.getDate() - 1);
     }
 
-    if (!calendario.innerHTML) calendario.innerHTML = `<p class="selecione-aviso">Nenhuma data disponível neste mês ❌</p>`;
+    // Penúltima sexta-feira
+    let penultimaSexta = new Date(ultimoDia);
+    penultimaSexta.setDate(penultimaSexta.getDate() - 7);
+
+    // Criar botões das duas últimas sextas
+    [penultimaSexta, ultimoDia].forEach(dt => {
+        let dia = dt.getDate();
+        let m = dt.getMonth() + 1;
+
+        let btn = document.createElement("button");
+        btn.classList.add("data-btn");
+        btn.innerText = `${dia}/${m}/2026`;
+        btn.onclick = () => selecionarData(btn);
+        calendario.appendChild(btn);
+    });
+
+    if (!calendario.innerHTML) calendario.innerHTML = `<p class="selecione-aviso">Nenhuma data disponível ❌</p>`;
 }
 
 function selecionarData(btn) {
@@ -180,7 +189,6 @@ function abrirFichaPessoal() {
 function fecharFichaPessoal() {
     document.getElementById("modal-ficha-pessoal").style.display = "none";
     document.getElementById("form-ficha").reset();
-
     document.querySelectorAll(".campo-extra").forEach(campo => campo.style.display = "none");
 }
 document.getElementById("modal-ficha-pessoal").addEventListener("click", function(e) {
@@ -214,7 +222,7 @@ document.getElementById("saude-vicio").addEventListener("change", function() {
 });
 
 /* ==========================================
-      ENVIAR TUDO (EMAIL JS)
+      ENVIAR FICHA COMPLETA (EMAIL JS)
 ========================================== */
 document.getElementById("form-ficha").addEventListener("submit", function(e) {
     e.preventDefault();
