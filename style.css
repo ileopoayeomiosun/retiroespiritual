@@ -815,7 +815,7 @@ h1 {
         display: flex;
         justify-content: center;
         gap: 25px;
-        margin-top: 500;              /* Espaço depois do Ori */
+        margin-top: 300;              /* Espaço depois do Ori */
         padding-bottom: 15px;
     }
 
