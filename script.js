@@ -1,7 +1,7 @@
 /* ==========================================
       INICIALIZAR EMAILJS
 ========================================== */
-emailjs.init("2BR4ZjBjuOxBBtxLu");
+emailjs.init("rq8gb8IY2ifgkUZlj");
 
 /* ==========================================
       MODAL RETIRO
@@ -257,7 +257,7 @@ document.getElementById("form-ficha").addEventListener("submit", function(e) {
         sobremesa: document.getElementById("saude-sobremesa").value || "-"
     };
 
-    emailjs.send("service_amqsdiv", "template_hv3vkec", dados)
+    emailjs.send("service_amqsdiv", "template_yzd20rc", dados)
     .then(() => {
         alert("📨 Ficha enviada com sucesso!");
         fecharFichaPessoal();
