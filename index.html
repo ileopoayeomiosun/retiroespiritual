@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1º Retiro Espiritual</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    emailjs.init('2BR4ZjBjuOxBBtxLu'); 
+</script>
+
+
+<body>
+
+<!-- MODAL DO RETIRO -->
+<div id="modal-retiro" class="modal">
+
+    <div class="modal-conteudo">
+        
+        <!-- Botão X -->
+        <button class="btn-fechar" onclick="fecharModal()">✕</button>
+
+        <!-- Imagem à esquerda -->
+        <div class="modal-img">
+            <img src="mae.png" alt="Yalorixá">
+        </div>
+
+        <!-- Texto ao lado -->
+        <div class="modal-texto">
+            <h2>Encontro com Ori</h2>
+
+            <p>
+                Este retiro surge de uma idealização da Yalorixá Sara t’Òsun, com o propósito de proporcionar um momento de reencontro consigo mesmo, vivido dentro de seu terreiro Ilé Òpó Ayé Omí Òsùn.
+                <br><br>
+                Ao buscarmos o autoconhecimento, despertamos a consciência do nosso lugar no Ayé (Terra) e fortalecemos o vínculo com nossa ancestralidade.
+                <br><br>
+                Ori é nossa direção, identidade e força interior.
+                Ao cuidarmos da nossa anatomia espiritual, abrimos caminhos para reconstruir o que necessitamos e iluminar aquilo que ainda pede silêncio.
+                <br><br>
+                O retiro Encontro com Ori é um espaço de cura, aprendizado e acolhimento, criado para que cada pessoa possa se reconectar com sua essência e com o propósito que carrega.
+                <br><br>
+                Venha fazer parte deste movimento de retorno à sua verdade.
+                Seu Ori espera por você.
+                <strong>Axé!</strong>
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<!-- ======================= -->
+<!-- MODAL DE INSCRIÇÕES     -->
+<!-- ======================= -->
+<div id="modal-inscricoes" class="modal">
+
+    <div class="modal-conteudo modal-inscrito">
+
+        <!-- Botão X do modal -->
+        <button class="btn-fechar" onclick="fecharModalInscricao()">✕</button>
+
+        <!-- Título -->
+        <div class="modal-insc-titulo">
+            <h2>Inscrições – Retiro Espiritual</h2>
+            <p class="valor">💰 Valor: R$ 150,00<br>📌 Pagamento somente no mês do retiro.</p>
+        </div>
+
+        <!-- Seleção de meses -->
+        <div class="meses-container">
+            <button class="mes-btn" data-mes="2">Fevereiro</button>
+            <button class="mes-btn" data-mes="3">Março</button>
+            <button class="mes-btn" data-mes="4">Abril</button>
+            <button class="mes-btn" data-mes="5">Maio</button>
+            <button class="mes-btn" data-mes="6">Junho</button>
+        </div>
+
+        <!-- Calendário dinâmico -->
+        <div id="calendario-container" class="calendario-container">
+            <p class="selecione-aviso">Selecione um mês acima 📅</p>
+        </div>
+
+        <!-- Formulário (escondido até escolher data) -->
+        <form id="form-inscricao" class="form-inscricao" style="display:none;">
+
+            <h3 class="data-escolhida"></h3>
+
+            <input type="text" id="nome" placeholder="Nome completo" required>
+            <input type="text" id="cidade" placeholder="Cidade" required>
+            <input type="text" id="telefone" placeholder="Telefone/WhatsApp" required>
+            <input type="text" id="religiao" placeholder="Religião ou Casa de Axé" required>
+            <textarea id="motivo" placeholder="Breve motivo da inscrição" required></textarea>
+
+            <button type="submit" class="btn enviar-inscricao">Enviar Inscrição</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- ======================= -->
+<!-- MODAL DE ACESSO         -->
+<!-- ======================= -->
+<div id="modal-acesso" class="modal">
+
+    <div class="modal-conteudo modal-acesso-box">
+
+        <!-- Botão X -->
+        <button class="btn-fechar" onclick="fecharModalAcesso()">✕</button>
+
+        <!-- Conteúdo -->
+        <h2 class="titulo-acesso">🔒 Acesso Restrito</h2>
+        <p class="texto-acesso">Digite a senha para continuar:</p>
+
+        <input type="password" id="senha-acesso" class="input-senha" placeholder="Digite a senha" required>
+
+        <p id="erro-senha" class="erro-senha" style="display:none;">❌ Senha incorreta!</p>
+
+        <button class="btn btn-acesso-confirmar" onclick="validarSenha()">Entrar</button>
+    </div>
+
+</div>
+
+<!-- ======================= -->
+<!-- MODAL ÁREA PRIVADA (ACESSO) -->
+<!-- ======================= -->
+<div id="modal-area-privada" class="modal">
+
+    <div class="modal-conteudo modal-logado">
+
+        <!-- Botão de Fechar (Ajustado) -->
+        <button class="btn-fechar" onclick="fecharAreaPrivada()">✕</button>
+
+
+        <!-- Título -->
+        <h2 class="titulo-privado">Bem-vindo(a) ao Retiro 🕊</h2>
+
+        <!-- Menu de Acesso -->
+        <div class="menu-acesso">
+            <button class="btn-privado" onclick="abrirOrientacoes()">📌 Orientações</button>
+            <button class="btn-privado" onclick="abrirFichaPessoal()">📄 Ficha Pessoal</button>
+            <button class="btn-privado">🖼️ Galeria</button>
+        </div>
+
+        <!-- Conteúdo Dinâmico -->
+        <div id="conteudo-privado" class="conteudo-privado">
+            <p class="privado-aviso">Selecione uma opção acima 👆</p>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ======================= -->
+<!-- FICHA PESSOAL (PDF) -->
+<!-- ======================= -->
+<!-- ======================= -->
+<!-- FICHA PESSOAL + SAÚDE -->
+<!-- ======================= -->
+<div id="modal-ficha-pessoal" class="modal">
+
+    <div class="modal-conteudo modal-logado">
+
+        <button class="btn-fechar" onclick="fecharFichaPessoal()">✕</button>
+
+        <h2 class="titulo-privado">📄 Ficha Pessoal</h2>
+
+        <form id="form-ficha" class="form-inscricao">
+
+            <input type="text" id="fp-nome" placeholder="Nome completo *" required>
+            <input type="text" id="fp-nascimento" placeholder="Data de Nascimento (dd/mm/aaaa) *" maxlength="10" required>
+            <input type="text" id="fp-doc" placeholder="Documento (RG/CPF) *" required>
+
+            <input type="text" id="fp-rua" placeholder="Rua e Número (opcional)">
+            <input type="text" id="fp-bairro" placeholder="Bairro (opcional)">
+            <input type="text" id="fp-cidade" placeholder="Cidade/Estado (opcional)">
+            <input type="text" id="fp-cep" placeholder="CEP (opcional)">
+
+            <input type="text" id="fp-whatsapp" placeholder="WhatsApp *" required>
+            <input type="email" id="fp-email" placeholder="E-mail *" required>
+
+            <h3>👥 Contato de Amigo Próximo</h3>
+            <input type="text" id="fp-amigo-nome" placeholder="Nome *" required>
+            <input type="text" id="fp-amigo-tel" placeholder="Telefone *" required>
+            <input type="text" id="fp-amigo-rel" placeholder="Relação *" required>
+
+            <h3>👪 Contato de Familiar</h3>
+            <input type="text" id="fp-fam-nome" placeholder="Nome *" required>
+            <input type="text" id="fp-fam-tel" placeholder="Telefone *" required>
+            <input type="text" id="fp-fam-rel" placeholder="Relação *" required>
+
+            <h3>🌿 Informações Religiosas</h3>
+
+            <select id="fp-sabe-orixa" required>
+                <option value="" disabled selected>Você sabe seu Orixá?</option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+            </select>
+
+            <input type="text" id="fp-nome-orixa" placeholder="Qual Orixá?" style="display:none;">
+
+
+            <!-- ==================== -->
+            <!-- ⚕ FICHA DE SAÚDE -->
+            <!-- ==================== -->
+            <h3>🩺 Ficha de Saúde e Cuidados Pessoais</h3>
+            <p><small>As informações são sigilosas e servem para o seu bem-estar durante o retiro.</small></p>
+
+            <!-- 1 -->
+            <label>1. Tem alergia a algum tipo de alimento?</label>
+            <select id="saude-alergia-alimento">
+                <option value="" disabled selected>Selecione</option>
+                <option value="Não">Não</option>
+                <option value="Sim">Sim</option>
+            </select>
+            <input type="text" id="saude-alergia-alimento-qual" placeholder="Qual(is)?" style="display:none;">
+
+            <!-- 2 -->
+            <label>2. Tem alergia a algum medicamento?</label>
+            <select id="saude-alergia-medicamento">
+                <option value="" disabled selected>Selecione</option>
+                <option value="Não">Não</option>
+                <option value="Sim">Sim</option>
+            </select>
+            <input type="text" id="saude-alergia-medicamento-qual" placeholder="Qual(is)?" style="display:none;">
+
+            <!-- 3 -->
+            <label>3. Há algum alimento que não consome por escolha ou restrição?</label>
+            <input type="text" id="saude-restricao-alimento" placeholder="Qual(is)? (opcional)">
+
+            <!-- 4 -->
+            <label>4. Toma chá com frequência?</label>
+            <select id="saude-cha">
+                <option value="" disabled selected>Selecione</option>
+                <option value="Não">Não</option>
+                <option value="Sim">Sim</option>
+            </select>
+            <input type="text" id="saude-cha-qual" placeholder="Qual? (ou restrições)" style="display:none;">
+
+            <!-- 5 -->
+            <label>5. Possui intolerância à lactose ou outra restrição alimentar?</label>
+            <select id="saude-intolerancia">
+                <option value="" disabled selected>Selecione</option>
+                <option value="Não">Não</option>
+                <option value="Sim">Sim</option>
+            </select>
+            <input type="text" id="saude-intolerancia-qual" placeholder="Qual?" style="display:none;">
+
+            <!-- 6 -->
+            <label>6. Faz uso de medicamento controlado?</label>
+            <select id="saude-controlado">
+                <option value="" disabled selected>Selecione</option>
+                <option value="Não">Não</option>
+                <option value="Sim">Sim</option>
+            </select>
+            <input type="text" id="saude-controlado-qual" placeholder="Qual(is)?" style="display:none;">
+
+            <!-- 7 -->
+            <label>7. Faz uso de medicamento contínuo?</label>
+            <select id="saude-continuo">
+                <option value="" disabled selected>Selecione</option>
+                <option value="Não">Não</option>
+                <option value="Sim">Sim</option>
+            </select>
+            <input type="text" id="saude-continuo-qual" placeholder="Qual(is)?" style="display:none;">
+
+            <!-- 8 -->
+            <label>8. Já teve trombose ou algum problema circulatório?</label>
+            <select id="saude-circulacao">
+                <option value="" disabled selected>Selecione</option>
+                <option value="Não">Não</option>
+                <option value="Sim">Sim</option>
+            </select>
+            <input type="text" id="saude-circulacao-descricao" placeholder="Descreva brevemente" style="display:none;">
+
+            <!-- 9 -->
+            <label>9. Possui diagnóstico de diabetes ou hipertensão?</label>
+            <select id="saude-diabetes-hipertensao">
+                <option value="" disabled selected>Selecione</option>
+                <option value="Não">Não</option>
+                <option value="Sim">Sim</option>
+            </select>
+            <input type="text" id="saude-diabetes-hipertensao-qual" placeholder="Especifique" style="display:none;">
+
+            <!-- 10 -->
+            <label>10. Possui algum vício (ex: cigarro, bebida, etc.)?</label>
+            <select id="saude-vicio">
+                <option value="" disabled selected>Selecione</option>
+                <option value="Não">Não</option>
+                <option value="Sim">Sim</option>
+            </select>
+            <input type="text" id="saude-vicio-qual" placeholder="Qual?" style="display:none;">
+            <input type="text" id="saude-vicio-abstinencia" placeholder="Sintomas de abstinência?" style="display:none;">
+
+            <!-- 11 -->
+            <label>11. Qual sua sobremesa favorita? (opcional)</label>
+            <input type="text" id="saude-sobremesa" placeholder="Ex: Pudim, cocada, bolo, etc.">
+
+            <p style="font-size: 0.9rem; text-align:center; margin-top:10px;"><i>“Cuidar do corpo é também cuidar do axé que habita em nós.”</i></p>
+
+            <button type="submit" class="btn enviar-inscricao">📥 Enviar Ficha</button>
+
+        </form>
+
+    </div>
+</div>
+
+
+<script>
+function abrirOrientacoes() {
+    document.getElementById("conteudo-privado").innerHTML = `
+        <h3 class="subtitulo-privado">Orientações aos Participantes</h3>
+
+        <div class="box-orientacoes">
+
+        <h4>👗 Vestuário</h4>
+        <p><strong>Mulheres:</strong> Roupas brancas, preferencialmente saias ou vestidos, não curtos.<br>
+        <strong>Homens:</strong> Roupas brancas, com calça ou bermuda abaixo do joelho.</p>
+
+        <h4>👜 Itens Pessoais Necessários</h4>
+        <ul>
+            <li>Roupa de cama (lençol, fronha e cobertor)</li>
+            <li>Toalha de banho</li>
+            <li>Itens de higiene pessoal:</li>
+        </ul>
+
+        <div class="lista-mimos">
+            <p>• Sabonete</p>
+            <p>• Escova e pasta de dentes</p>
+            <p>• Shampoo</p>
+            <p>• Desodorante</p>
+            <p>• Outros itens de uso pessoal</p>
+        </div>
+
+        <p class="frase-final">🌿 Cuide de si. Prepare seu Ori com carinho. Axé! ✨</p>
+        </div>
+    `;
+}
+</script>
+
+
+
+<!-- CONTEÚDO PRINCIPAL -->
+<div class="layout">
+    <div class="lado-esquerdo">
+        <img src="brasao.png" class="brasao" alt="Brasão">
+    </div>
+
+    <div class="lado-direito">
+        <h1>1º Retiro Espiritual</h1>
+        
+
+
+        <div class="botoes">
+            <!-- Botão que abre o modal -->
+            <button class="btn" onclick="abrirModal()">O Retiro</button>
+
+            <button class="btn destaque">Inscrições</button>
+
+            <button class="btn acesso">🔒 Acesso</button>
+        </div>
+    </div>
+</div>
+<img src="Ori.png" class="decor-ori" alt="ornamento de Ori">
+<!-- ÍCONES FIXOS (WHATSAPP & EMAIL) -->
+<div class="icones-contato">
+    <a href="https://wa.me/5581999477226?text=Olá,%20quero%20informações%20sobre%20o%201º%20Retiro%20Espiritual." target="_blank">
+        <img src="zap.png" class="icone-contato" alt="WhatsApp">
+    </a>
+
+    <a href="mailto:dinahbarreto@gmail.com">
+        <img src="mail.png" class="icone-contato" alt="E-mail">
+    </a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+
+<script src="script.js"></script>
+</body>
+</html>
