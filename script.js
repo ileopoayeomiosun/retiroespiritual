@@ -109,7 +109,7 @@ document.getElementById("form-inscricao").addEventListener("submit", function(e)
         motivo: document.getElementById("motivo").value
     };
 
-    emailjs.send("service_amqsdiv", "template_hv3vkec", dadosInsc)
+    emailjs.send("service_n1gugrh", "template_hv3vkec", dadosInsc)
     .then(() => {
         alert("📨 Inscrição enviada com sucesso!");
         fecharModalInscricao();
@@ -265,7 +265,7 @@ document.getElementById("form-ficha").addEventListener("submit", function(e) {
         sobremesa: document.getElementById("saude-sobremesa").value || "-"
     };
 
-    emailjs.send("service_amqsdiv", "template_yzd20rc", dados)
+    emailjs.send("service_n1gugrh", "template_yzd20rc", dados)
     .then(() => {
         alert("📨 Ficha enviada com sucesso!");
         fecharFichaPessoal();
