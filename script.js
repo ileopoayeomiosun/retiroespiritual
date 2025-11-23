@@ -41,19 +41,15 @@ function gerarDatas(mes) {
     calendario.innerHTML = "";
     let ano = 2026;
 
-    // Último dia do mês
     let ultimoDia = new Date(ano, mes, 0);
 
-    // Encontra a última sexta-feira do mês
     while (ultimoDia.getDay() !== 5) {
         ultimoDia.setDate(ultimoDia.getDate() - 1);
     }
 
-    // Penúltima sexta-feira
     let penultimaSexta = new Date(ultimoDia);
     penultimaSexta.setDate(penultimaSexta.getDate() - 7);
 
-    // Criar botões das duas últimas sextas
     [penultimaSexta, ultimoDia].forEach(dt => {
         let dia = dt.getDate();
         let m = dt.getMonth() + 1;
@@ -262,8 +258,16 @@ document.getElementById("form-ficha").addEventListener("submit", function(e) {
         vicio: document.getElementById("saude-vicio").value,
         vicio_qual: document.getElementById("saude-vicio-qual").value || "-",
         vicio_abst: document.getElementById("saude-vicio-abstinencia").value || "-",
-        sobremesa: document.getElementById("saude-sobremesa").value || "-"
+        sobremesa: document.getElementById("saude-sobremesa").value || "-",
+        ciente_custo: document.getElementById("fp-ciente-custo").value
     };
+
+    /* 🚨 VALIDAR CONFIRMAÇÃO DE CUSTO */
+    const custo = document.getElementById("fp-ciente-custo").value.trim().toLowerCase();
+    if (custo !== "sim") {
+        alert("⚠️ Para participar, digite exatamente: Sim");
+        return;
+    }
 
     emailjs.send("service_n1gugrh", "template_yzd20rc", dados)
     .then(() => {
