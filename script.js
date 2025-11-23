@@ -42,7 +42,6 @@ function gerarDatas(mes) {
     let ano = 2026;
 
     let ultimoDia = new Date(ano, mes, 0);
-
     while (ultimoDia.getDay() !== 5) {
         ultimoDia.setDate(ultimoDia.getDate() - 1);
     }
@@ -53,7 +52,6 @@ function gerarDatas(mes) {
     [penultimaSexta, ultimoDia].forEach(dt => {
         let dia = dt.getDate();
         let m = dt.getMonth() + 1;
-
         let btn = document.createElement("button");
         btn.classList.add("data-btn");
         btn.innerText = `${dia}/${m}/2026`;
@@ -131,14 +129,17 @@ document.getElementById("fp-nascimento").addEventListener("input", function(e) {
 document.querySelector(".acesso").addEventListener("click", function() {
     document.getElementById("modal-acesso").style.display = "flex";
 });
+
 function fecharModalAcesso() {
     document.getElementById("modal-acesso").style.display = "none";
     document.getElementById("senha-acesso").value = "";
     document.getElementById("erro-senha").style.display = "none";
 }
+
 document.getElementById("modal-acesso").addEventListener("click", function(e) {
     if (e.target.id === "modal-acesso") fecharModalAcesso();
 });
+
 function validarSenha() {
     let senha = document.getElementById("senha-acesso").value;
     if (senha === "OriRetiro") {
@@ -148,6 +149,7 @@ function validarSenha() {
         document.getElementById("erro-senha").style.display = "block";
     }
 }
+
 document.getElementById("senha-acesso").addEventListener("keyup", function(e) {
     if (e.key === "Enter") validarSenha();
 });
@@ -162,6 +164,7 @@ function fecharAreaPrivada() {
 document.getElementById("modal-area-privada").addEventListener("click", function(e) {
     if (e.target.id === "modal-area-privada") fecharAreaPrivada();
 });
+
 function abrirOrientacoes() {
     document.getElementById("conteudo-privado").innerHTML = `
         <h3 class="subtitulo-privado">Orientações aos Participantes</h3>
@@ -229,6 +232,13 @@ document.getElementById("form-ficha").addEventListener("submit", function(e) {
         documento: document.getElementById("fp-doc").value,
         whatsapp: document.getElementById("fp-whatsapp").value,
         email: document.getElementById("fp-email").value,
+
+        /* 🏠 ENDEREÇO CORRIGIDO */
+        rua: document.getElementById("fp-rua").value || "-",
+        bairro: document.getElementById("fp-bairro").value || "-",
+        cidade: document.getElementById("fp-cidade").value || "-",
+        cep: document.getElementById("fp-cep").value || "-",
+
         amigo_nome: document.getElementById("fp-amigo-nome").value,
         amigo_tel: document.getElementById("fp-amigo-tel").value,
         amigo_rel: document.getElementById("fp-amigo-rel").value,
